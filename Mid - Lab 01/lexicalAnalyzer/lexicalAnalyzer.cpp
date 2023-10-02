@@ -4,48 +4,45 @@
 using namespace std;
 
 int main(){
-    char statement[12];
-
-    // for Input
-    //for(int i=0; i < 11; i++){
-    //    cin >> statement[i] ;
-    //}
-
-    cout << "Provide input: " ;
-    cin.getline(statement, 12);
-    cout << endl;
-
-    // for output
-    /*
-    cout << "Input String => " ;
-    for(int i=0; i < 11; i++){
-        cout << statement[i] ;
-    }
-    cout << endl;
-    */
-
+    string statement; //To Store The String Data for Compiler Use
+    int numberOfCharInStatement = 1;
     int syntaxTableManagerIndex = 0;
-
-    for(int i=0; i < 11; i++){
-        //if (isalpha(statement[i]) || statement[i] == '+' || statement[i] == '-' || statement[i] == '*' || statement[i] == '/' || statement[i] == '%' || statement[i] == '=' || statement[i] == ';'){
-        if (isalpha(statement[i])){
-            cout << "<id," << syntaxTableManagerIndex++ << ">" << endl;
+    
+    cout << "Provide input: " ;
+    getline(cin, statement);
+    cout << endl;
+    
+    cout << "Input String => " << statement << endl;
+    
+    // counting the number of characters
+    for(char i : statement){
+        numberOfCharInStatement++;
+        if(i == ';'){
+            break;
         }
-
-            /*
-        else if (isdigit(statement[i]))){
-            cout << "<" << statement[i] << ">" << endl;
-        }
-        */
-
-        else if (isdigit(statement[i]) || statement[i] == '+' || statement[i] == '-' || statement[i] == '*' || statement[i] == '/' || statement[i] == '%' || statement[i] == '=' || statement[i] == ';'){
-            cout << "<" << statement[i] << ">" << endl;
-            if(statement[i] == ';')
-                break;
-        }
-        //}
     }
+    
+    cout << endl;
 
-
+    for(int i=0; i < numberOfCharInStatement; i++){
+        if (isalpha(statement[i])){
+            if (!isalpha(statement[i+1])){
+                cout << "<id," << syntaxTableManagerIndex++ << ">";
+            }
+        }
+        
+        else if (isdigit(statement[i])){
+            if (!isdigit(statement[i+1])){
+                cout << "<" << statement[i-1] << statement[i] << ">";
+            }
+        }
+        
+        else if (statement[i] == '+' || statement[i] == '-' || statement[i] == '*' || statement[i] == '/' || statement[i] == '%' || statement[i] == '=' || statement[i] == ';'){
+            cout << "<" << statement[i] << ">";
+            if(statement[i] == ';'){
+                break;
+            }
+        }
+    }
     return 0;
 }
