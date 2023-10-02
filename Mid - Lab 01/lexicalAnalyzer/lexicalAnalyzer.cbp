@@ -1,42 +1,48 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
-<CodeBlocks_project_file>
-	<FileVersion major="1" minor="6" />
-	<Project>
-		<Option title="lexicalAnalyzer" />
-		<Option pch_mode="2" />
-		<Option compiler="gcc" />
-		<Build>
-			<Target title="Debug">
-				<Option output="bin/Debug/lexicalAnalyzer" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj/Debug/" />
-				<Option type="1" />
-				<Option compiler="gcc" />
-				<Compiler>
-					<Add option="-g" />
-				</Compiler>
-			</Target>
-			<Target title="Release">
-				<Option output="bin/Release/lexicalAnalyzer" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj/Release/" />
-				<Option type="1" />
-				<Option compiler="gcc" />
-				<Compiler>
-					<Add option="-O2" />
-				</Compiler>
-				<Linker>
-					<Add option="-s" />
-				</Linker>
-			</Target>
-		</Build>
-		<Compiler>
-			<Add option="-Wall" />
-		</Compiler>
-		<Unit filename="lexicalAnalyzer.cpp" />
-		<Extensions>
-			<code_completion />
-			<envvars />
-			<debugger />
-			<lib_finder disable_auto="1" />
-		</Extensions>
-	</Project>
-</CodeBlocks_project_file>
+#include<iostream>
+#include<cctype>
+
+using namespace std;
+
+int main(){
+    string statement; //To Store The String Data for Compiler Use
+    int numberOfCharInStatement = 1;
+    int syntaxTableManagerIndex = 0;
+    
+    cout << "Provide input: " ;
+    getline(cin, statement);
+    cout << endl;
+    
+    cout << "Input String => " << statement << endl;
+    
+    // counting the number of characters
+    for(char i : statement){
+        numberOfCharInStatement++;
+        if(i == ';'){
+            break;
+        }
+    }
+    
+    cout << endl;
+
+    for(int i=0; i < numberOfCharInStatement; i++){
+        if (isalpha(statement[i])){
+            if (!isalpha(statement[i+1])){
+                cout << "<id," << syntaxTableManagerIndex++ << ">";
+            }
+        }
+        
+        else if (isdigit(statement[i])){
+            if (!isdigit(statement[i+1])){
+                cout << "<" << statement[i-1] << statement[i] << ">";
+            }
+        }
+        
+        else if (statement[i] == '+' || statement[i] == '-' || statement[i] == '*' || statement[i] == '/' || statement[i] == '%' || statement[i] == '=' || statement[i] == ';'){
+            cout << "<" << statement[i] << ">";
+            if(statement[i] == ';'){
+                break;
+            }
+        }
+    }
+    return 0;
+}
