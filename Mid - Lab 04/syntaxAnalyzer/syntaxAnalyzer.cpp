@@ -176,5 +176,26 @@ int main(){
         }
     }
     
+    char rule1 = {'A', '-', '>', 'B', 'C', 'D', 'E', 'D', 'F', ';'};
+    char rule2 = {'B', '-', '>', 'i'};
+    char rule3 = {'C', '-', '>', '='};
+    char rule4 = {'D', '-', '>', 'i'};
+    char rule5 = {'D', '-', '>', '0'};
+    char rule6 = {'D', '-', '>', '1'};
+    char rule7 = {'D', '-', '>', '2'};
+    char rule8 = {'D', '-', '>', '3'};
+    char rule9 = {'D', '-', '>', '4'};
+    char rule10 = {'D', '-', '>', '5'};
+    char rule11 = {'D', '-', '>', '6'};
+    char rule12 = {'D', '-', '>', '7'};
+    char rule13 = {'D', '-', '>', '8'};
+    char rule14 = {'D', '-', '>', '9'};
+    char rule15 = {'E', '-', '>', '+'};
+    char rule16 = {'E', '-', '>', '-'};
+    char rule17 = {'E', '-', '>', '*'};
+    char rule18 = {'E', '-', '>', '/'};
+    char rule19 = {'E', '-', '>', '%'};
+    char rule20 = {'F', '-', '>', ';'};
+    
     return 0;
 }
