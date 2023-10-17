@@ -1,5 +1,0 @@
-# depslib dependency file v1.0
-1695701302 source:c:\users\student\desktop\compiler_l01\lexicalanalyzer\lexicalanalyzer.cpp
-	<iostream>
-	<cctype>
-
