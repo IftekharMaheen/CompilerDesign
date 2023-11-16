@@ -1,21 +1,20 @@
 #include<iostream>
 #include<cctype>
-#include<string>
 
 using namespace std;
 
 int main(){
     string statement; //To Store The String Data for Compiler Use
     int numberOfCharInStatement = 1; //To store size of statement
-    int syntaxTableManagerIndex = 0; //Suntax table index manager
-    //string temporaryNumericCharacterStorage;
+    int syntaxTableManagerIndex = 0; //Syntax table index manager
+    int digitLengthCounter = 0; //Length of numeric variables
     
     // Taking input of statement
     cout << "Provide input: " ;
-    getline(cin, statement); //Requires cctype library
+    getline(cin, statement);
     cout << endl;
     
-    // Print statement provided
+     // Print statement provided
     cout << "Input String => " << statement << endl;
     
     // Counting the number of characters by using foreach
@@ -28,13 +27,11 @@ int main(){
     }
     
     cout << endl;
-    
-    // Result section
-    cout << "Lexical Result => " ;
-    
+
     // Checking characters one by one
     for(int i=0; i < numberOfCharInStatement; i++){
-        // Check if the character is Alphabatic of not
+         
+       // Check if the character is Alphabatic of not
         if (isalpha(statement[i])){
             // Checking if the following character is Alphabatic or not. Else print Token
             if (!isalpha(statement[i+1])){
@@ -44,28 +41,29 @@ int main(){
         
         // Check if the the following character is Numeric or not
         else if (isdigit(statement[i])){
-            string temporaryNumericCharacterStorage;
             // Checking if the following character is Numeric or not. Else print Token
             if (!isdigit(statement[i+1])){
-                cout << "<" << temporaryNumericCharacterStorage << ">";
-                /*
-                if (statement[i-1] == '+' || statement[i-1] == '-' || statement[i-1] == '*' || statement[i-1] == '/' || statement[i-1] == '%' || statement[i-1] == '='){
-                    cout << "<" << statement[i] << ">";
+                string tempDigitStorage; // Temporary storage for the numeric variable
+                // From the beginning of the numeric variable to the end of the variable the following loop will operate
+                for (int x = (i - digitLengthCounter); x <= i; x++ ){
+                    tempDigitStorage = tempDigitStorage + statement[x];
                 }
-                else{
-                    cout << "<" << statement[i-1] << statement[i] << ">";
-                }
-                */
+                cout << "<" << tempDigitStorage << ">";
             }
+            //If the immediate next index does not consist a digit, increase the digit length counter
+            digitLengthCounter++;
         }
         
         // Check if the following is an operator or not
-        else if (statement[i] == '+' || statement[i] == '-' || statement[i] == '*' || statement[i] == '/' || statement[i] == '%' || statement[i] == '=' || statement[i] == ';'){
-            cout << "<" << statement[i] << ">";
-            // Checking the end of a statement
-            if(statement[i] == ';'){
-                break;
-            }
+        else if (statement[i] == '+' || statement[i] == '-' || statement[i] == '*' 
+                || statement[i] == '/' || statement[i] == '%' || statement[i] == '=' 
+                || statement[i] == ';'){
+                cout << "<" << statement[i] << ">";
+                
+                // Checking the end of a statement        
+                if(statement[i] == ';'){
+                    break;
+                }
         }
     }
     return 0;
